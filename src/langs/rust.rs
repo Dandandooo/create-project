@@ -8,9 +8,8 @@ fn init() -> Result<(), Error> {
         .output();
     
     if cargo.is_err() {
-        println!("Would you like to install cargo? (y/n)");
+        print!("Would you like to install cargo? (y/n): ");
         let mut input = String::new();
-        print!("> ");
         let _ = stdout().flush();
         stdin().read_line(&mut input).unwrap();
         if input.trim() == "y" || input.trim() == "Y" {
@@ -21,6 +20,7 @@ fn init() -> Result<(), Error> {
         }
     }
 
+    // Initialize default Cargo project
     Command::new("cargo")
         .arg("init")
         .spawn()
