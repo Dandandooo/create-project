@@ -1,6 +1,5 @@
 use std::process::Command;
 use std::io::{stdin, stdout, Write};
-use std::env::consts::OS;
 
 fn init(directory: String, git: bool) -> Result<(), std::io::Error> {
     let cargo: Result<_> = Command::new("which")
@@ -14,13 +13,7 @@ fn init(directory: String, git: bool) -> Result<(), std::io::Error> {
         let _ = stdout().flush();
         stdin().read_line(&mut input).unwrap();
         if input.trim() == "y" {
-            Command::new("curl")
-                .arg("https://sh.rustup.rs")
-                .arg("-sSf")
-                .arg("|")
-                .arg("sh")
-                .spawn()
-                .expect("Failed to install rustup");
+           install_cargo();
         } else {
             println!("Cargo is required to initialize a rust project");
             return Err(std::io::Error::new(std::io::ErrorKind::Other, "Cargo not installed"));
@@ -32,24 +25,22 @@ fn init(directory: String, git: bool) -> Result<(), std::io::Error> {
             .arg("init")
             .spawn()
             .expect("Failed to initialize git repository");
-        let ignore: Result<_> = Command::new("curl")
-            .arg(format!("https://www.toptal.com/developers/gitignore/api/{OS},rust"))
-            .arg("-output")
+
+        let rust_gitignore = include_str!("rust.txt");
+
+        let command = Command::new("echo")
+            .arg(rust_gitignore)
+            .arg(">>")
             .arg(".gitignore")
-            .current_dir(directory)
-            .output();
+            .spawn()
+            .expect("Failed to create .gitignore");
 
-        if ignore.is_err() {
-            println!("Failed to download .gitignore file! Creating empty .gitignore file...");
-            Command::new("touch")
-                .arg(".gitignore")
-                .current_dir(directory)
-                .spawn()
-                .expect("Failed to create .gitignore file")
-        } else {
-            println!("Downloaded .gitignore file");
-        } 
-
+        let command = Command::new("echo")
+            .arg(rust_gitignore)
+            .arg(">>")
+            .arg(".gitignore")
+            .spawn()
+            .expect("Failed to create .gitignore");
     }
 
     Command::new("cargo")
@@ -59,4 +50,14 @@ fn init(directory: String, git: bool) -> Result<(), std::io::Error> {
         .expect("Failed to initialize cargo project");
 
     Ok(())
+}
+
+fn install_cargo() {
+    Command::new("curl")
+        .arg("https://sh.rustup.rs")
+        .arg("-sSf")
+        .arg("|")
+        .arg("sh")
+        .spawn()
+        .expect("Failed to install rustup");
 }
