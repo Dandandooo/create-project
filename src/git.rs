@@ -1,5 +1,6 @@
 use std::process::Command;
 use std::io::{stdin, stdout, Write};
+use std::io::{Error, ErrorKind};
 use std::env::const::OS;
 
 fn init(language: String, project_name: String) -> Result<(), std::io::Error> {

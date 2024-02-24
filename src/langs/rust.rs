@@ -1,7 +1,8 @@
 use std::process::Command;
 use std::io::{stdin, stdout, Write};
+use std::io::{Error, ErrorKind};
 
-fn init() -> Result<(), std::io::Error> {
+fn init() -> Result<(), Error> {
     let cargo: Result<_> = Command::new("which")
         .arg("cargo")
         .output();
@@ -16,7 +17,7 @@ fn init() -> Result<(), std::io::Error> {
            install_cargo();
         } else {
             eprintln!("Cargo is required to initialize a rust project");
-            return Err(std::io::Error::new(std::io::ErrorKind::Other, "Cargo not installed"));
+            return Err(Error::new(ErrorKind::Other, "Cargo not installed"));
         }
     }
 
