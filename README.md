@@ -1,38 +1,40 @@
-# create-project
+# hello-lang
 Simple script to create a sample project in any language
 
 ## Supported Languages
-- Rust
-- Python
-    - Flask
-    - Django
-    - FastAPI
-- Java
-    - Gradle
-    - Maven
-    - Scala
-- JavaScript/TypeScript
-    - React (Specify ReactTS or ReactJS)
-    - Vue
-    - Svelte
-    - Angular
+- Angular
 - C
+- Clojure
 - C++
-    - Unreal Engine
-- C#
-    - Unity Engine
+- Dart
+- Django
 - .NET
-- Ruby
-- OCaml
+- Elixir
+- Express
+- FastAPI
+- Flask
+- Go
+- Groovy
+- Haskell
+- Java
+- JavaScript
 - Julia
 - Kotlin
-- Go
-- Elixir
-- Dart
-- Clojure
-- Haskell
-- Cuda
+- Maven
+- NextJS
+- OCaml
+- Perl
+- PHP
+- Python
+- ReactJS
+- ReactTS
+- Ruby
+- Rust
+- Scala
+- Svelte
 - Swift
+- TypeScript
+- Vue
 - Zig
 
 *Note: we do not plan on supporting nix >:(*
