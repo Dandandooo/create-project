@@ -10,61 +10,68 @@ pub fn valid_args() -> ArgMap {
 }
 
 pub fn init(config: &CommandConfig) -> Result<(), String> {
-    todo!();
-    // let cargo: Result<_> = Command::new("which")
-    //     .arg("cargo")
-    //     .output();
-    // 
-    // if cargo.is_err() {
-    //     println!("Would you like to install cargo? (y/n)");
-    //     let mut input = String::new();
-    //     print!("> ");
-    //     let _ = stdout().flush();
-    //     stdin().read_line(&mut input).unwrap();
-    //     if input.trim() == "y" {
-    //         Command::new("curl")
-    //             .arg("https://sh.rustup.rs")
-    //             .arg("-sSf")
-    //             .arg("|")
-    //             .arg("sh")
-    //             .spawn()
-    //             .expect("Failed to install rustup");
-    //     } else {
-    //         println!("Cargo is required to initialize a rust project");
-    //         return Err(std::io::Error::new(std::io::ErrorKind::Other, "Cargo not installed"));
-    //     }
-    // }
-    //
-    // if git {
-    //     Command::new("git")
-    //         .arg("init")
-    //         .spawn()
-    //         .expect("Failed to initialize git repository");
-    //     let ignore: Result<_> = Command::new("curl")
-    //         .arg(format!("https://www.toptal.com/developers/gitignore/api/{OS},rust"))
-    //         .arg("-output")
-    //         .arg(".gitignore")
-    //         .current_dir(directory)
-    //         .output();
-    //
-    //     if ignore.is_err() {
-    //         println!("Failed to download .gitignore file! Creating empty .gitignore file...");
-    //         Command::new("touch")
-    //             .arg(".gitignore")
-    //             .current_dir(directory)
-    //             .spawn()
-    //             .expect("Failed to create .gitignore file")
-    //     } else {
-    //         println!("Downloaded .gitignore file");
-    //     } 
-    //
-    // }
-    //
-    // Command::new("cargo")
-    //     .arg("init")
-    //     .arg(directory)
-    //     .spawn()
-    //     .expect("Failed to initialize cargo project");
+
+    let cargo: Result<_> = Command::new("which")
+        .arg("cargo")
+        .output();
+    
+    if cargo.is_err() {
+        print!("Would you like to install cargo? (y/n): ");
+        let mut input = String::new();
+        let _ = stdout().flush();
+        stdin().read_line(&mut input).unwrap();
+        if input.trim() == "y" || input.trim() == "Y" {
+           install_cargo();
+        } else {
+            eprintln!("Cargo is required to initialize a rust project");
+            return Err(Error::new(ErrorKind::Other, "Cargo not installed"));
+        }
+    }
+
+    if let Err(_) = Command::new("which")
+            .arg("cargo")
+            .output() {
+        print!("Would you like to install cargo? (y/n): ");
+        let mut input = String::new();
+        let _ = stdout().flush();
+        stdin().read_line(&mut input).unwrap();
+        if input.trim() == "y" || input.trim() == "Y" {
+           install_cargo();
+        } else {
+            eprintln!("Cargo is required to initialize a rust project");
+            return Err(format!("Cargo not installed"));
+        }
+    }
+
+    
+    if cargo.is_err() {
+        print!("Would you like to install cargo? (y/n): ");
+        let mut input = String::new();
+        let _ = stdout().flush();
+        stdin().read_line(&mut input).unwrap();
+        if input.trim() == "y" || input.trim() == "Y" {
+           install_cargo();
+        } else {
+            eprintln!("Cargo is required to initialize a rust project");
+            return Err(Error::new(ErrorKind::Other, "Cargo not installed"));
+        }
+    }
+
+    // Initialize default Cargo project
+    Command::new("cargo")
+        .arg("init")
+        .spawn()
+        .expect("Failed to initialize cargo project");
 
     Ok(())
+}
+
+fn install_cargo() {
+    Command::new("curl")
+        .arg("https://sh.rustup.rs")
+        .arg("-sSf")
+        .arg("|")
+        .arg("sh")
+        .spawn()
+        .expect("Failed to install rustup");
 }
