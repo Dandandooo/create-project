@@ -14,12 +14,12 @@ fn main() {
 }
 
 fn run() -> Res {
-
     let globs = Globals {
         valid_global_args: global_args(),
         languages: supported_languages(),
         dependencies: dependencies()?,
     };
+    ensure_installed(["cargo".to_string(), "upt".to_string()].iter(), &globs.dependencies)?;
 
     let cmd = Command::parse(args(), &globs)?;
     cmd.exec(&globs)?;
