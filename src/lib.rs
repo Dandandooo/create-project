@@ -235,7 +235,18 @@ impl Command {
     }
 
     fn global_command(&self, globs: &Globals) -> Res {
-        // TODO
+        let flags = &self.global_config.flags;
+        if flags.contains("help") {
+            print_help(globs.valid_global_args);
+            return Ok(());
+        }
+        
+        if flags.contains("git") {
+            ensure_installed(["git".to_string].iter(), &globs.dependencies);
+        }
+
+        if flags.contains()
+
         Ok(())
     }
 
