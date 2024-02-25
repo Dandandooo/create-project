@@ -1,23 +1,28 @@
 use std::process::Command;
-use std::io::{stdin, stdout, Write};
-use std::io::{Error, ErrorKind};
+use crate::{ CommandConfig, ArgMap, Res };
 
-fn init() -> Result<(), Error> {
-    let node: Result<_> = Command::new("which").arg("npm").output();
+use std::fs::{ create_dir, rename, remove_dir, File };
 
-    if node.is_err() {
-        print!("Would you like to install Node.js? (y/n): ");
-        let mut input = String::new();
-        let _ = stdout().flush();
-        stdin().read_line(&mut input).unwrap();
-        if input.trim() == "y" || input.trim() == "Y" {
-            // TODO: Install Node.js
-        } else {
-            eprintln!("Node.js is required!");
-            return Err(Error::new(ErrorKind::Other, "Node.js not installed"));
+pub fn init(config: &CommandConfig) -> Res {
+    match config.vars.get("name") {
+        Some(name) => {
+            Command::new("npm").args(["init", "-y", "-w", name]).spawn()?;
+            rename(format!("{name}/package.json"), "package.json")?;
+            remove_dir(name)?;
+        },
+        None => {
+            Command::new("npm").arg("init").arg("-y").spawn()?;
         }
-    }
+    } 
+    // Create src directory
+    create_dir("src")?;
 
-    // Download Typescript
-    let _ = Command::new("npm").arg("install").arg("-g").arg("typescript");
+    // Create index.js
+    let mut file = File::create("src/index.js")?;
+
+    file.write_all(b"console.log('Hello, World!')")?;
+}
+
+pub fn valid_args() -> ArgMap {
+    ArgMap::new()
 }
