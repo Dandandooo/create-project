@@ -1,4 +1,4 @@
-const NAME: &str = "create";
+const NAME: &str = "hello-lang";
 
 pub mod args;
 pub mod langs;
@@ -12,6 +12,8 @@ use std::rc::Rc;
 use std::error::Error;
 use args::{ArgMap, ArgType, Arg, CommandConfig};
 use langs::Language;
+
+use crate::dependencies::ensure_installed;
 
 
 #[macro_export]
@@ -238,9 +240,9 @@ impl Command {
     }
 
     fn lang_command(self, globs: &Globals) -> Res {
-        println!("here i would resolve dependencies"); // TODO
         let lcfg = self.lang_config.unwrap();
-        (lcfg.0.exec)(&lcfg.2);
+        ensure_installed(lcfg.0.uses.iter(), &globs.dependencies)?;
+        (lcfg.0.exec)(&lcfg.2)?;
         Ok(())
     }
 }
