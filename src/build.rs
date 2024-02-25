@@ -30,5 +30,5 @@ fn install_gitignore(set: HashSet<String>) {
     sorted_filenames.sort();
     let filenames = sorted_filenames.join(","); 
 
-    Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}", ">", format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
+    Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}"), ">", format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
 }
