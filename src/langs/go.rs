@@ -1,25 +1,18 @@
 use std::process::Command;
-use std::io::{stdin, stdout, Write};
-use std::io::{Error, ErrorKind};
+use crate::{ CommandConfig, ArgMap, Res };
 
-fn init() -> Result<(), Error> {
-    let go: Result<_> = Command::new("which").arg("go").output();
-
-    if go.is_err() {
-        print!("Would you like to install Go? (y/n): ");
-        let mut input = String::new();
-        let _ = stdout().flush();
-        stdin().read_line(&mut input).unwrap();
-        if input.trim() == "y" || input.trim() == "Y" {
-            //TODO: Install Go
-        } else {
-            eprintln!("Go is required!");
-            return Err(Error::new(ErrorKind::Other, "Go not installed"));
-        }
+pub fn init(config: &CommandConfig) -> Res {
+    match config.vars.get("name") {
+        Some(_) => eprintln!("Go does not support project names"),
+        None => {}
     }
 
     // Initialize default go project
-    Command::new("go").arg("mod").arg("init").spawn().expect("Failed to initialize go project");
+    Command::new("go").arg("mod").arg("init").spawn()?;
 
     Ok(())
+}
+
+pub fn valid_args() -> ArgMap {
+    Argmap::new()
 }

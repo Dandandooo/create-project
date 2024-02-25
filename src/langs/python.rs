@@ -1,35 +1,21 @@
 use std::process::Command;
-use std::io::{stdin, stdout, Write};
-use std::io::{Error, ErrorKind};
+use crate::{ CommandConfig, ArgMap, Res };
 
-fn init() -> Result<(), Error>{
-    let check = Command::new("which")
-        .arg("python3")
-        .output();
-
-    if check.is_err() {
-        println!("Python is not installed!");
-        print!("Would you like to install it? (y/n): ");
-        let mut input = String::new();
-        let _ = stdout().flush();
-        stdin().read_line(&mut input).unwrap();
-        if input.trim() == "y" || input.trim() == "Y" {
-            //TODO: Install python
-        } else {
-            println!("Python is required to use this tool.");
-            return Err(Error::new(ErrorKind::Other, "Python not installed"));
-        }
+pub fn init(config: &CommandConfig) -> Res {
+    match config.vars.get("name") {
+        Some(_) => eprintln!("Python does not support project names"),
+        None => {}
     }
 
-    let python = Command::new("python3")
-        .arg("-m")
-        .arg("venv")
-        .spawn()
-        .expect("Failed to create virtual environment");
+    // Create virtual environment
+    Command::new("python3").args(["-m", "venv", "venv"]).spawn()?; 
 
     // Create Hello World
-    Command::new("touch").arg("main.py").spawn().expect("Failed to create main.py");
-    Command::new("echo").arg("print(\"Hello, World!\")").arg(">>").arg("main.py").spawn().expect("Failed to edit main.py");
+    std::fs::write("main.py", b"print(\"Hello, World!\")")?;
 
     Ok(())
+}
+
+pub fn valid_args() -> ArgMap {
+    ArgMap::new()
 }
