@@ -1,6 +1,7 @@
 use std::env::args;
 use create_project::*;
 use args::*;
+use dependencies::*;
 use langs::*;
 
 fn main() {
@@ -14,10 +15,14 @@ fn main() {
 
 fn run() -> Result<(), Box<dyn Error>> {
 
-    let global_args = global_args();
-    let langs = supported_languages();
+    let globs = Globals {
+        valid_global_args: global_args(),
+        languages: supported_languages(),
+        dependencies: dependencies(),
+    }
+
     let cmd = Command::parse(args())?;
-    cmd.exec(&global_args, &langs)?;
+    cmd.exec(&global_args)?;
 
     Ok(())
 }

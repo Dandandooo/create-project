@@ -9,7 +9,6 @@ pub fn init(config: &CommandConfig) -> Res {
 
     // Create Sample Haskell Project
     Command::new("cabal").arg("init").spawn()?;
-
     Ok(())
 }
 

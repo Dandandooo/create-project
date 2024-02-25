@@ -16,7 +16,7 @@ pub struct Arg {
 
 pub enum ArgType {
     Var {
-        parse: Box<dyn Fn(&str) -> Res<String> + Send + Sync>, // attempts to parse what the user has passed in
+        parse: Box<dyn Fn(&str) -> Res<String>>, // attempts to parse what the user has passed in
     },
     Flag,
 }
@@ -34,7 +34,7 @@ pub fn global_args() -> ArgMap {
             description: "the name of the project you want to make".to_string(),
             aliases: string_set!["n"],
             arg_type: ArgType::Var {
-                parse: Box::new(|s| { Ok(s) }),
+                parse: Box::new(|s| { Ok(s.to_string()) }),
             },
             mutually_exclusive: HashSet::new(),
         }),

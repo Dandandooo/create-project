@@ -2,11 +2,13 @@ const NAME: &str = "create";
 
 pub mod args;
 pub mod langs;
+pub mod dependencies;
 
 pub type Res<T=()> = Result<T, Box<dyn Error>>;
 
-use std::env::args;
 use std::collections::{HashMap, HashSet};
+use dependencies::Dependency;
+use std::rc::Rc;
 use std::error::Error;
 use args::{ArgMap, ArgType, Arg, CommandConfig};
 use langs::Language;
@@ -38,14 +40,19 @@ macro_rules! string_set {
     };
 }
 
+pub struct Globals {
+    pub valid_global_args: ArgMap,
+    pub languages: HashMap<String, Rc::<Language>>,
+    pub dependencies: HashMap<String, Dependency>,
+}
+
 pub struct Command {
     pub global_config: CommandConfig,
-    pub language: Option<String>,
-    pub lang_config: Option<CommandConfig>,
+    pub lang_config: Option<(Rc::<Language>, ArgMap, CommandConfig)>
 }
 
 impl Command {
-    pub fn parse(args: std::env::Args) -> Res<Self> {
+    pub fn parse(args: std::env::Args, globs: &Globals) -> Res<Self> {
         let mut args = args.into_iter().skip(1).peekable();
 
 
@@ -61,12 +68,26 @@ impl Command {
             let has_value = next_arg.map_or(false, |a| { a.starts_with("-") });
 
             if arg.starts_with("--") {
+                let mut var = arg.chars().skip(2).collect::<String>();
                 if has_value {
-                    global_config.vars.insert(arg, args.next().unwrap());
+                    let arg = match globs.valid_global_args.get(&arg) {
+                        Some(a) => a,
+                        None => return Err(Box::from(format!("{} not a valid global option", arg)))
+                    };
+
+                    if let ArgType::Var { parse } = arg.arg_type {
+                        var = parse(&var)?;
+                    }
+
+                    global_config.vars.insert(var, args.next().unwrap());
                     continue;
                 }
 
-                global_config.flags.insert(arg);
+                if let None = globs.valid_global_args.get(&var) {
+                    return Err(Box::from(format!("{} not a valid global flag", var)));
+                }
+
+                global_config.flags.insert(var);
                 continue;
             } 
 
@@ -80,11 +101,24 @@ impl Command {
                                  run {} --help for a list of commands", 
                            &arg, NAME)));
                     }
+                    let mut var = chars[0].to_string();
+                    let arg = match globs.valid_global_args.get(&arg) {
+                        Some(a) => a,
+                        None => return Err(Box::from(format!("{} not a valid global option", arg)))
+                    };
+
+                    if let ArgType::Var { parse } = arg.arg_type {
+                        var = parse(&var)?;
+                    }
+                    global_config.vars.insert(var, args.next().unwrap());
                     global_config.vars.insert(chars[0].to_string(), args.next().unwrap());
                     continue;
                 }
 
                 for c in chars {
+                    if let None = globs.valid_global_args.get(&c.to_string()) {
+                        return Err(Box::from(format!("{} not a valid global flag", c)));
+                    }
                     global_config.flags.insert(c.to_string());
                 }
 
@@ -95,27 +129,55 @@ impl Command {
             break; // reached language
         }
 
-        let mut lang_config = language.map(|_| {
-            CommandConfig {
-                vars: HashMap::new(),
-                flags: HashSet::new(),
-            }
-        });
+        let mut lang_config = match language {
+            Some(l_name) => Some({
+                let lang = match globs.languages.get(&l_name) {
+                    Some(l) => l.clone(),
+                    None => return Err(Box::from(format!("
+                            sorry, {} is not supported yet :(\n
+                            run {} --list for a list of supported languages
+                            ", l_name, NAME)))
+                };
+                let arg_map = (lang.valid_args)();
+                let config = CommandConfig {
+                    vars: HashMap::new(),
+                    flags: HashSet::new(),
+                };
+
+                (lang, arg_map, config)
+            }),
+            None => None,
+        };
 
         // process lang
 
-        while let Some(arg) = args.next() {
+        while let Some(arg) = args.next() { // TODO change from global to lang
             let mut lang_config = &lang_config.unwrap();
+
             let next_arg = args.peek();
             let has_value = next_arg.map_or(false, |a| { a.starts_with("-") });
 
             if arg.starts_with("--") {
+                let mut var = arg.chars().skip(2).collect::<String>();
                 if has_value {
-                    global_config.vars.insert(arg, args.next().unwrap());
+                    let arg = match globs.valid_global_args.get(&arg) {
+                        Some(a) => a,
+                        None => return Err(Box::from(format!("{} not a valid global option", arg)))
+                    };
+
+                    if let ArgType::Var { parse } = arg.arg_type {
+                        var = parse(&var)?;
+                    }
+
+                    global_config.vars.insert(var, args.next().unwrap());
                     continue;
                 }
 
-                global_config.flags.insert(arg);
+                if let None = globs.valid_global_args.get(&var) {
+                    return Err(Box::from(format!("{} not a valid global flag", var)));
+                }
+
+                global_config.flags.insert(var);
                 continue;
             } 
 
@@ -129,11 +191,24 @@ impl Command {
                                  run {} --help for a list of commands", 
                            &arg, NAME)));
                     }
+                    let mut var = chars[0].to_string();
+                    let arg = match globs.valid_global_args.get(&arg) {
+                        Some(a) => a,
+                        None => return Err(Box::from(format!("{} not a valid global option", arg)))
+                    };
+
+                    if let ArgType::Var { parse } = arg.arg_type {
+                        var = parse(&var)?;
+                    }
+                    global_config.vars.insert(var, args.next().unwrap());
                     global_config.vars.insert(chars[0].to_string(), args.next().unwrap());
                     continue;
                 }
 
                 for c in chars {
+                    if let None = globs.valid_global_args.get(&c.to_string()) {
+                        return Err(Box::from(format!("{} not a valid global flag", c)));
+                    }
                     global_config.flags.insert(c.to_string());
                 }
 
@@ -143,70 +218,23 @@ impl Command {
 
         Ok(Self {
             global_config,
-            language,
             lang_config,
         })
     }
 
-    fn validate(&mut self, valid_global_args: &ArgMap, valid_lang_args: &Option<ArgMap>) -> Res {
-        for flag in &self.global_config.flags {
-            if let None = valid_global_args.get(flag) {
-                return Err(Box::from(format!("{} not a valid global flag", flag)));
-            }
-        }
+    pub fn exec(&self, globs: &Globals) -> Res {
+        todo!()
+    }
 
-        for (var, val) in &mut self.global_config.vars {
-            let arg = match valid_global_args.get(var) {
-                Some(a) => a,
-                None => return Err(Box::from(format!("{} not a valid global option", var)))
-            };
+    fn global_command(&self, globs: &Globals) -> Res {
+        todo!()
+    }
 
-            if let ArgType::Var { parse } = arg.arg_type {
-                *val = parse(&val)?;
-            }
-        }
-
-        if let (Some(l), Some(v)) = (&self.lang_config, &valid_lang_args) {
-            for flag in &l.flags {
-                if let None = v.get(flag) {
-                    return Err(Box::from(format!("{} not a valid flag for {}", flag, self.language.unwrap())));
-                }
-            }
-        }
+    fn lang_command(&self, globs: &Globals) -> Res {
+        println!("here i would resolve dependencies"); // TODO
+        let lcfg = self.lang_config.unwrap();
+        (lcfg.0.exec)(&lcfg.2);
         Ok(())
-    }
-
-    pub fn exec(&mut self, valid_global_args: &ArgMap, supported_langs: &HashMap<String, Language>) -> Res{
-        let lang_args = match &self.language {
-            Some(l) => {
-                let args = supported_langs.get(l);
-                match args {
-                    Some(a) => Some((a.valid_args)()), 
-                    None => return Err(Box::from(format!("
-                            sorry, {} is not supported yet :(\n
-                            run {} --list for a list of supported languages
-                            ", l, NAME)))
-                }
-            }, 
-            None => None,
-        };
-        self.validate(valid_global_args, &lang_args)?;
-
-
-        if let Some(lang_args) = lang_args {
-            self.global_command(valid_global_args);
-            self.lang_command(valid_global_args, &lang_args)
-        } else {
-            self.global_command(valid_global_args)
-        }
-    }
-
-    fn global_command(&self, valid_global_args: &ArgMap) -> Res {
-        todo!()
-    }
-
-    fn lang_command(&self, valid_global_args: &ArgMap, valid_lang_args: &ArgMap) -> Res {
-        todo!()
     }
 }
 
