@@ -3,26 +3,21 @@ use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType };
 use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
-    match config.vars.get("name") {
-        Some(_) => eprintln!("Flask does not support project names"),
-        None => {}
-    }
-    
     let venv_prefix = match config.vars.get("virtual-environment") {
         Some(_) => {
             Command::new("python3").args(["-m", "venv", "venv"]).spawn()?;
             "venv/bin/"
         },
-        None => "",
+        None => ""
+    };
+    Command::new(format!("{venv_prefix}pip")).args(["install", "Django"]).spawn()?;
+
+    let name = match config.vars.get("name") {
+        Some(name) => name,
+        None => "."
     };
 
-    // Install flask
-    Command::new(format!("{venv_prefix}pip")).args(["install", "flask"]).spawn()?;
-
-    // Create Hello World
-    let sample_code = b"from flask import Flask\napp = Flask(__name__)\napp = Flask(__name__)\n\n@app.route('/')\ndef index():\n    return 'Hello, World!'".to_string();
-    
-    std::fs::write("app.py", sample_code)?;
+    Command::new(format!("{venv_prefix}django-admin").args(["startproject", "project", name]).spawn()?;
 
     Ok(())
 }
@@ -44,3 +39,4 @@ pub fn valid_args() -> ArgMap {
     }
     out
 }
+

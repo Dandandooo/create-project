@@ -4,25 +4,23 @@ use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
     match config.vars.get("name") {
-        Some(_) => eprintln!("Flask does not support project names"),
-        None => {}
+        Some(name) => eprintln!("FastAPI does not support project names"),
+        None => {};
     }
-    
+
     let venv_prefix = match config.vars.get("virtual-environment") {
         Some(_) => {
             Command::new("python3").args(["-m", "venv", "venv"]).spawn()?;
             "venv/bin/"
         },
-        None => "",
+        None => ""
     };
 
-    // Install flask
-    Command::new(format!("{venv_prefix}pip")).args(["install", "flask"]).spawn()?;
+    Command::new(format!("{venv_prefix}pip")).args(["install", "fastapi"]).spawn()?;
 
-    // Create Hello World
-    let sample_code = b"from flask import Flask\napp = Flask(__name__)\napp = Flask(__name__)\n\n@app.route('/')\ndef index():\n    return 'Hello, World!'".to_string();
-    
-    std::fs::write("app.py", sample_code)?;
+    let sample_code = b"from fastapi import FastAPI\napp = FastAPI()\n\napp = FastAPI()\n\n@app.get('/')\nasync def root():\n    return {\"message\": \"Hello, World\"}";
+
+    std::fs::write("main.py", sample_code)?;
 
     Ok(())
 }
