@@ -1,9 +1,7 @@
 use std::process::Command;
-use std::error::Error;
-use crate::CommandConfig;
-use crate::ArgMap;
+use crate::{ CommandConfig, ArgMap, Res };
 
-pub fn init(config: &CommandConfig) -> Result<(), Box<dyn Error>> {
+pub fn init(config: &CommandConfig) -> Res {
     let args = match config.vars.get("name") {
         Some(name) => vec!["init", "--name", name],
         None => vec!["init"]

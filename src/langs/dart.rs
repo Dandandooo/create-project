@@ -1,9 +1,7 @@
 use std::process::Command;
-use std::error::Error;
-use crate::CommandConfig;
-use crate::ArgMap;
+use crate::{ CommandConfig, ArgMap, Res };
 
-pub fn init(config: &CommandConfig) -> Result<(), Box<dyn Error>> {
+pub fn init(config: &CommandConfig) -> Res {
     match config.vars.get("name") {
         Some(_) => eprintln!("Dart does not support project names"),
         None => {}
