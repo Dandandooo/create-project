@@ -1,39 +1,68 @@
 use std::process::Command;
-use std::collections::HashSet;
-
-#[path = "langs/mod.rs"]
-mod langs;
-
-use langs::supported_languages;
+use std::fs::remove_dir_all;
+use std::fs::create_dir;
+use std::fs::write;
 
 fn main() {
-    let ignores = compile_ignores();
+    let os_es = vec!["macos", "linux", "windows"];
+    let ignores = vec![
+        "angular,typescript,javascript".to_string(),
+        "c".to_string(),
+        "clojure".to_string(),
+        "c++".to_string(),
+        "dart".to_string(), 
+        "django,python".to_string(),
+        "dotnetcore".to_string(),
+        "elixir".to_string(),
+        "express,javascript,typescript".to_string(),
+        "fastapi,python".to_string(),
+        "flask,python".to_string(),
+        "go".to_string(),
+        "groovy".to_string(),
+        "haskell".to_string(),
+        "java".to_string(),
+        "javascript".to_string(),
+        "julia".to_string(),
+        "kotlin".to_string(),
+        "maven,java".to_string(),
+        "nextjs,javascript,typescript".to_string(),
+        "ocaml".to_string(),
+        "perl".to_string(),
+        "php,laravel".to_string(),
+        "python".to_string(),
+        "react,javascript,typescript".to_string(),
+        "ruby,rails".to_string(),
+        "rust".to_string(),
+        "scala".to_string(),
+        "svelte".to_string(),
+        "swift".to_string(),
+        "typescript".to_string(),
+        "vue,javascript,typescript".to_string(),
+        "zig".to_string(),
+    ];
+
+    if remove_dir_all("src/langs/gitignores").is_err() {
+        eprintln!("Failed to remove gitignores directory");
+    }
+
+    create_dir("src/langs/gitignores").expect("Failed to create gitignores directory");
+
 
     for ignore in ignores {
-        install_gitignore(ignore);
-        println!("Installed gitignore for language: {ignore}");
-    }
-}
-
-fn compile_ignores() -> Vec<HashSet<String>> {
-    let mut ignores = Vec::new();
-
-    let langs = supported_languages();
-    for (lang, properties) in langs.into_iter() {
-        for ignore in properties.get("ignore").unwrap() {
-            ignores.push(ignore.clone());
+        for os in os_es.iter() {
+            install_gitignore(format!("{os},{ignore}"));
+            println!("Installed gitignore for language: {ignore}");
         }
     }
-
-    ignores
 }
 
-fn install_gitignore(set: HashSet<String>) {
-    let sorted_filenames = set.into_iter().collect::<Vec<String>>();
-    sorted_filenames.sort();
-    let gitignore = sorted_filenames.join(",");
-    let filenames = sorted_filenames.join("_"); 
-
-    Command::new("touch").args([format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
-    Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}"), ">".to_string(), format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
+fn install_gitignore(gitignore: String) {
+    let filenames = gitignore.replace(",", "_");
+    let file_path = format!("src/langs/gitignores/{filenames}.txt");
+    let cur_dir = String::from_utf8(Command::new("pwd").output().unwrap().stdout).unwrap();
+    println!("cur_dir: {cur_dir}");
+    let touch = Command::new("touch").arg(file_path.clone()).output().expect("Failed to create gitignore file");
+    let curl = Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}")]).output();
+    let curl_text = String::from_utf8(curl.unwrap().stdout).unwrap();
+    write(file_path, curl_text).expect("Failed to write to gitignore file");
 }
