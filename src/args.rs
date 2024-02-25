@@ -2,20 +2,21 @@ use std::collections::{HashSet, HashMap};
 use std::rc::Rc;
 
 use super::{string_set};
+use crate::Res;
 
 pub type ArgMap = HashMap<String, Rc<Arg>>;
 
 pub struct Arg {
-    name: String, // with --
-    description: String, // what will be printed in the help cmd
-    aliases: HashSet<String>, // with -
-    arg_type: ArgType, // flag or var
-    mutually_exclusive: HashSet<String>, // other flags, vars
+    pub name: String, // with --
+    pub description: String, // what will be printed in the help cmd
+    pub aliases: HashSet<String>, // with -
+    pub arg_type: ArgType, // flag or var
+    pub mutually_exclusive: HashSet<String>, // other flags, vars
 }
 
 pub enum ArgType {
     Var {
-        parse: Box<dyn Fn(String) -> Result<String, String> + Send + Sync>, // attempts to parse what the user has passed in
+        parse: Box<dyn Fn(&str) -> Res<String> + Send + Sync>, // attempts to parse what the user has passed in
     },
     Flag,
 }
