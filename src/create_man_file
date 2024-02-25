@@ -1,0 +1,9 @@
+text=$(man --path)
+
+IFS=':'
+
+read -ra newarr <<< "$text"
+
+${newarr[0]}
+
+cp man_hellolang "$home${newarr[0]}"
