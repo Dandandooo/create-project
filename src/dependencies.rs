@@ -40,7 +40,12 @@ pub fn dependencies() -> Res<HashMap<String, Dependency>> {
                 ]).output()?;
                 Ok(())
             })),
-        }
+        },
+
+        Dependency {
+            name: "git".to_string(),
+            install: InstallType::UPT,
+        },
     ];
 
     let mut out = HashMap::new();
@@ -55,7 +60,7 @@ where
 I: Iterator<Item = &'a String>
 {
     for dep_name in ensure {
-        if let Ok(_) = Command::new(&dep_name).stdin(Stdio::null()).output() {
+        if let Ok(_) = Command::new("which").args([&dep_name]).stdin(Stdio::null()).output() {
             continue;
         }
 

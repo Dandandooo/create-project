@@ -72,3 +72,11 @@ pub fn global_args() -> ArgMap {
     }
     out
 }
+
+pub fn print_help(args: &ArgMap) -> String {
+    let mut out = String::new();
+    let mut keys = args.iter().map(|k, _| { k.clone() }).collect();
+    keys.sort();
+
+    out
+}
