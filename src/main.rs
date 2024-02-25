@@ -1,18 +1,23 @@
-use std::env::consts::OS;
 use std::env::args;
-use std::collections::HashMap;
+use create_project::*;
+use args::*;
+use langs::*;
 
 fn main() {
-    let args: Vec<String> = args().collect();
-    if args.len() < 2 {
-        println!("Usage: {} <project name>", args[0]);
-        return;
+    let program = run();
+    if let Err(err) = program {
+        eprint!("{err}");
+        std::process::exit(1);
     }
-    let project_name = &args[1];
-    let directory = format!("{}/{}", env!("HOME"), project_name);
-    let git = true;
-    match init(directory, git) {
-        Ok(_) => println!("Project initialized"),
-        Err(e) => println!("Error: {}", e),
-    }
+    std::process::exit(0);
+}
+
+fn run() -> Result<(), String> {
+
+    let global_args = global_args();
+    let langs = supported_languages();
+    let cmd = Command::parse(args())?;
+    cmd.exec(&global_args, &langs)?;
+
+    Ok(())
 }
