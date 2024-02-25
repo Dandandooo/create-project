@@ -1,6 +1,4 @@
 # hello-lang
-![Static Badge](https://img.shields.io/badge/blazingly_fast-speed?color=orange)
-
 Simple script to create a sample project in any language
 
 ## Supported Languages
