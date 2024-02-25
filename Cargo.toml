@@ -19,7 +19,7 @@ repository = "https://github.com/Dandandooo/create-project"
 license = "MIT"
 publish = true
 
-build = "build.rs"
+build = "src/build.rs"
 
 exclude = [
     ".git/",
@@ -29,6 +29,15 @@ exclude = [
     ".vscode/",
     ".DS_Store",
 ]
+
+include = [
+    "src/",
+    "Cargo.toml",
+    "Cargo.lock",
+    "README.md",
+    "LICENSE",
+]
+
 
 [dependencies]
 upt = "0.5.0"
