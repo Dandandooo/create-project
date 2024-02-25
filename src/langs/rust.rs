@@ -9,7 +9,9 @@ pub fn init(config: &CommandConfig) -> Result<(), String> {
     };
 
     // Initialize default Cargo project
-    Command::new("cargo").args(args).spawn().expect("Failed to initialize cargo project");
+    if let Err(e) = Command::new("cargo").args(args) {
+        return Err(format!("Failed to initialize cargo project: {}", e));
+    }
 
     Ok(())
 }
