@@ -75,7 +75,7 @@ pub fn global_args() -> ArgMap {
 
 pub fn print_help(args: &ArgMap) -> String {
     let mut out = String::new();
-    let mut keys = args.iter().map(|k, _| { k.clone() }).collect();
+    let mut keys: Vec<_> = args.iter().map(|(k, _)| { k.clone() }).collect();
     keys.sort();
 
     out
