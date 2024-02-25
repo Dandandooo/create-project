@@ -1,40 +1,18 @@
 use std::process::Command;
-use std::io::{stdin, stdout, Write};
-use std::io::{Error, ErrorKind};
+use std::collections::HashMap; 
 
-fn init() -> Result<(), Error> {
-    let cargo: Result<_> = Command::new("which")
-        .arg("cargo")
-        .output();
+fn init(config: &CommandConfig) -> Result<(), String> {
+    let args = match config.vars.get("name") {
+        Some(name) => vec!["init", "--name", name],
+        None => vec!["init"]
+    };
     
-    if cargo.is_err() {
-        print!("Would you like to install cargo? (y/n): ");
-        let mut input = String::new();
-        let _ = stdout().flush();
-        stdin().read_line(&mut input).unwrap();
-        if input.trim() == "y" || input.trim() == "Y" {
-           install_cargo();
-        } else {
-            eprintln!("Cargo is required to initialize a rust project");
-            return Err(Error::new(ErrorKind::Other, "Cargo not installed"));
-        }
-    }
-
     // Initialize default Cargo project
-    Command::new("cargo")
-        .arg("init")
-        .spawn()
-        .expect("Failed to initialize cargo project");
+    Command::new("cargo").args(args).spawn().expect("Failed to initialize cargo project");
 
     Ok(())
 }
 
-fn install_cargo() {
-    Command::new("curl")
-        .arg("https://sh.rustup.rs")
-        .arg("-sSf")
-        .arg("|")
-        .arg("sh")
-        .spawn()
-        .expect("Failed to install rustup");
+fn valid_args() -> HashMap<String, String> {
+    HashMap::new()
 }
