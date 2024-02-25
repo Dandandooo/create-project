@@ -1,7 +1,7 @@
 use std::process::Command;
 use crate::{ CommandConfig, ArgMap, Res };
 
-use std::fs::{ create_dir, rename, remove_dir, File };
+use std::fs::{ create_dir, rename, remove_dir, write };
 
 pub fn init(config: &CommandConfig) -> Res {
     match config.vars.get("name") {
@@ -18,9 +18,9 @@ pub fn init(config: &CommandConfig) -> Res {
     create_dir("src")?;
 
     // Create index.js
-    let mut file = File::create("src/index.js")?;
+    write("src/index.js", b"console.log('Hello, World!')")?;
 
-    file.write_all(b"console.log('Hello, World!')")?;
+    Ok(())
 }
 
 pub fn valid_args() -> ArgMap {
