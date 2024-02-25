@@ -1,17 +1,18 @@
-.\" Manpage for nuseradd.
-.\" Contact vivek@nixcraft.net.in to correct errors or typos.
+.\" Manpage for hello_lang.
+.\" Contact akshayvellore@gmail.com to correct errors or typos
 .TH man 8 "06 May 2010" "1.0" "nuseradd man page"
 .SH NAME
-nuseradd \- create a new LDAP user
+hello_lang \- create a starter project in any programming language from the command line
 .SH SYNOPSIS
-nuseradd [USERNAME]
+hello_lang [GLOBAL FLAGS/ARGS] [language] [LANGUAGE FLAGS/ARGS]
 .SH DESCRIPTION
-nuseradd is high level shell program for adding users to LDAP server.  On Debian, administrators should usually use nuseradd.debian(8) instead.
+hello_lang is a rust-based command line tool that can create a starter project in a variety of programming languages, including Python, Java, Haskell, etc. It has a variety of global flags for the system and local flags for each specific language.
 .SH OPTIONS
-The nuseradd does not take any options. However, you can supply username.
-.SH SEE ALSO
-useradd(8), passwd(5), nuseradd.debian(8)
+There is a vast number of options and flags for hello_lang that aren't listed here but can be learned more about in the GitHub repository.
 .SH BUGS
 No known bugs.
 .SH AUTHOR
-Vivek Gite (vivek@nixcraft.net.in)
+Daniel Philipov
+Roshan Hedge
+Akshay Vellore
+Abhinav Angirekula
