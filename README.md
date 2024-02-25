@@ -12,11 +12,10 @@ Simple script to create a sample project in any language
     - Maven
     - Scala
 - JavaScript/TypeScript
-    - React
+    - React (Specify ReactTS or ReactJS)
     - Vue
     - Svelte
     - Angular
-    - JQuery
 - C
 - C++
     - Unreal Engine
