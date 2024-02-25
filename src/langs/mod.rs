@@ -9,6 +9,7 @@ use crate::Res;
 use super::args::{CommandConfig, ArgMap};
 use std::collections::{HashSet, HashMap};
 use std::env;
+use std::rc::Rc;
 use super::string_set;
 
 pub struct Language {
@@ -19,15 +20,15 @@ pub struct Language {
     pub ignores: HashSet<String>, // git ignores
 }
 
-pub fn supported_languages() -> HashMap<String, Language> {
+pub fn supported_languages() -> HashMap<String, Rc<Language>> {
     let langs = [
-        Language {
+        Rc::new(Language {
             name: "rust".to_string(),
             exec: Box::new(rust::init),
             valid_args: Box::new(rust::valid_args),
             uses: string_set!["cargo"],
             ignores: string_set![env::consts::OS, "rust"],
-        },
+        }),
     ];
 
     let mut out = HashMap::new();

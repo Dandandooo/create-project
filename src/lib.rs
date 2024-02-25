@@ -42,13 +42,13 @@ macro_rules! string_set {
 
 pub struct Globals {
     pub valid_global_args: ArgMap,
-    pub languages: HashMap<String, Language>,
+    pub languages: HashMap<String, Rc::<Language>>,
     pub dependencies: HashMap<String, Dependency>,
 }
 
 pub struct Command {
     pub global_config: CommandConfig,
-    pub lang_config: Option<Language, ArgMap, CommandConfig)>
+    pub lang_config: Option<(Rc::<Language>, ArgMap, CommandConfig)>
 }
 
 impl Command {
@@ -132,7 +132,7 @@ impl Command {
         let mut lang_config = match language {
             Some(l_name) => Some({
                 let lang = match globs.languages.get(&l_name) {
-                    Some(l) => l,
+                    Some(l) => l.clone(),
                     None => return Err(Box::from(format!("
                             sorry, {} is not supported yet :(\n
                             run {} --list for a list of supported languages
@@ -218,60 +218,12 @@ impl Command {
 
         Ok(Self {
             global_config,
-            lang_config: lang_config,
+            lang_config,
         })
     }
 
-    fn validate(&mut self, globs: &Globals) -> Res {
-        for flag in &self.global_config.flags {
-            if let None = globs.valid_global_args.get(flag) {
-                return Err(Box::from(format!("{} not a valid global flag", flag)));
-            }
-        }
-
-        for (var, val) in &mut self.global_config.vars {
-            let arg = match globs.valid_global_args.get(var) {
-                Some(a) => a,
-                None => return Err(Box::from(format!("{} not a valid global option", var)))
-            };
-
-            if let ArgType::Var { parse } = arg.arg_type {
-                *val = parse(&val)?;
-            }
-        }
-
-        if let (Some(l), Some(v)) = (&self.lang_config, &valid_lang_args) {
-            for flag in &l.flags {
-                if let None = v.get(flag) {
-                    return Err(Box::from(format!("{} not a valid flag for {}", flag, self.language.unwrap())));
-                }
-            }
-        }
-        Ok(())
-    }
-
-    pub fn exec(&mut self, globs: &Globals) -> Res {
-        let lang_args = match &self.language {
-            Some(l) => {
-                let args = supported_langs.get(l);
-                match args {
-                    Some(a) => Some((a.valid_args)()), 
-                    None => return Err(Box::from(format!("
-                            sorry, {} is not supported yet :(\n
-                            run {} --list for a list of supported languages
-                            ", l, NAME)))
-                }
-            }, 
-            None => None,
-        };
-        self.validate(globs)?;
-
-        if let Some(lang_args) = lang_args {
-            // self.global_command(valid_global_args);
-            self.lang_command(globs)
-        } else {
-            self.global_command(globs)
-        }
+    pub fn exec(&self, globs: &Globals) -> Res {
+        todo!()
     }
 
     fn global_command(&self, globs: &Globals) -> Res {
@@ -280,8 +232,8 @@ impl Command {
 
     fn lang_command(&self, globs: &Globals) -> Res {
         println!("here i would resolve dependencies"); // TODO
-        let l = globs.valid_lang_args.get(&self.language.unwrap()).unwrap();
-        l.exec(&self.lang_config.unwrap())?;
+        let lcfg = self.lang_config.unwrap();
+        (lcfg.0.exec)(&lcfg.2);
         Ok(())
     }
 }
