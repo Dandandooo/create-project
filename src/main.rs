@@ -12,7 +12,7 @@ fn main() {
     std::process::exit(0);
 }
 
-fn run() -> Result<(), String> {
+fn run() -> Result<(), Box<dyn Error>> {
 
     let global_args = global_args();
     let langs = supported_languages();

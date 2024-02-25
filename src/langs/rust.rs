@@ -1,18 +1,15 @@
 use std::process::Command;
+use std::error::Error;
 use crate::CommandConfig;
 use crate::ArgMap;
 
-pub fn init(config: &CommandConfig) -> Result<(), String> {
+pub fn init(config: &CommandConfig) -> Result<(), Box<dyn Error>> {
     let args = match config.vars.get("name") {
         Some(name) => vec!["init", "--name", name],
         None => vec!["init"]
     };
 
-    // Initialize default Cargo project
-    if let Err(e) = Command::new("cargo").args(args) {
-        return Err(format!("Failed to initialize cargo project: {}", e));
-    }
-
+    Command::new("cargo").args(args).spawn()?;
     Ok(())
 }
 
