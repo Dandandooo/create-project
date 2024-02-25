@@ -26,7 +26,9 @@ fn compile_ignores() -> Vec<HashSet<String>> {
 fn install_gitignore(set: HashSet<String>) {
     let gitignore = set.join(",");
 
-    let sorted_filenames = set.into_iter().collect::<Vec<String>>().sort().join("_");
-    
-    Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}", ">", format!("./langs/gitignores/{sorted_filenames}.txt")]).spawn().expect("Failed to install gitignore");
+    let sorted_filenames = set.into_iter().collect::<Vec<String>>();
+    sorted_filenames.sort();
+    let filenames = sorted_filenames.join(","); 
+
+    Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}", ">", format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
 }
