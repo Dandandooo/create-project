@@ -57,7 +57,7 @@ pub fn global_args() -> ArgMap {
 
         Rc::new(Arg {
             name: "version".to_string(),
-            description: "prints help info".to_string(),
+            description: "prints current version".to_string(),
             aliases: string_set!["v"],
             arg_type: ArgType::Flag,
             mutually_exclusive: string_set!["name", "git"],

@@ -13,16 +13,16 @@ fn main() {
     std::process::exit(0);
 }
 
-fn run() -> Result<(), Box<dyn Error>> {
+fn run() -> Res {
 
     let globs = Globals {
         valid_global_args: global_args(),
         languages: supported_languages(),
-        dependencies: dependencies(),
-    }
+        dependencies: dependencies()?,
+    };
 
-    let cmd = Command::parse(args())?;
-    cmd.exec(&global_args)?;
+    let cmd = Command::parse(args(), &globs)?;
+    cmd.exec(&globs)?;
 
     Ok(())
 }
