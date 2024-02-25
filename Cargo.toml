@@ -3,6 +3,44 @@ name = "create-project"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+rust-version = "1.76.0"
+
+authors = ["Daniel Philipov <dp33@illinois.edu>",
+           "Roshan Hedge <rhedge@illinois.edu>",
+           "Akshay Vellore <akshayv4@illinois.edu>",
+           "Abhinav Angirekula <aa125@illinois.edu>"
+           ]
+
+description = "A tool to create a new project with a single command"
+readme = "README.md"
+repository = "https://github.com/Dandandooo/create-project"
+
+
+license = "MIT"
+publish = true
+
+build = "src/build.rs"
+
+exclude = [
+    ".git/",
+    "target/",
+    "Cargo.lock",
+    ".idea/",
+    ".vscode/",
+    ".DS_Store",
+]
+
+include = [
+    "src/",
+    "Cargo.toml",
+    "Cargo.lock",
+    "README.md",
+    "LICENSE",
+]
+
 
 [dependencies]
+upt = "0.5.0"
+
+[profile.release]
+opt-level = "s"

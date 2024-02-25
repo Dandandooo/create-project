@@ -1,12 +1,17 @@
 use std::process::Command;
-use crate::langs::supported_languages;
 use std::collections::HashSet;
+
+#[path = "langs/mod.rs"]
+mod langs;
+
+use langs::supported_languages;
 
 fn main() {
     let ignores = compile_ignores();
 
     for ignore in ignores {
         install_gitignore(ignore);
+        println!("Installed gitignore for language: {ignore}");
     }
 }
 
@@ -24,11 +29,11 @@ fn compile_ignores() -> Vec<HashSet<String>> {
 }
 
 fn install_gitignore(set: HashSet<String>) {
-    let gitignore = set.join(",");
-
     let sorted_filenames = set.into_iter().collect::<Vec<String>>();
     sorted_filenames.sort();
-    let filenames = sorted_filenames.join(","); 
+    let gitignore = sorted_filenames.join(",");
+    let filenames = sorted_filenames.join("_"); 
 
-    Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}"), ">", format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
+    Command::new("touch").args([format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
+    Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}"), ">".to_string(), format!("./langs/gitignores/{filenames}.txt")]).spawn().expect("Failed to install gitignore");
 }
