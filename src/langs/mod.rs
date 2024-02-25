@@ -101,8 +101,8 @@ pub fn supported_languages() -> HashMap<String, Rc<Language>> {
 
         Rc::new(Language {
             name: "dotnet".to_string(),
-            exec: Box::new(dotnetcore::init),
-            valid_args: Box::new(dotnetcore::valid_args),
+            exec: Box::new(dotnet::init),
+            valid_args: Box::new(dotnet::valid_args),
             uses: string_set!["dotnet"],
             ignores: string_set![env::consts::OS, "dotnetcore"],
         }),

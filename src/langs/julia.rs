@@ -13,7 +13,7 @@ pub fn init(config: &CommandConfig) -> Res {
         .arg(format!("using Pkg; Pkg.generate(\"{name}\")"))
         .spawn()?;
 
-    Command::new("mv").args([format!("{name}/*"), "."]).spawn()?;
+    Command::new("mv").args([format!("{name}/*"), ".".to_string()]).spawn()?;
 
     std::fs::remove_dir(name)?;
 

@@ -24,13 +24,9 @@ pub fn init(config: &CommandConfig) -> Res {
     create_dir(format!("{}/obj", dir))?;
     create_dir(format!("{}/test", dir))?;
 
-    let mut file = File::create(format!("{}/src/main.c", dir))?;
+    write(format!("{}/src/main.c", dir), sample_code)?;
 
-    file.write_all(sample_code)?;
-
-    makefile = File::create(format!("{}/Makefile", dir))?;
-
-    makefile.write_all(b"CC=gcc\nCFLAGS=-Iinclude\nLDFLAGS=-Llib\n\nall: main\n\nmain: obj/main.o\n\t$(CC) -o bin/main obj/main.o $(LDFLAGS)\n\nobj/main.o: src/main.c\n\t$(CC) -c -o obj/main.o src/main.c $(CFLAGS)\n\nclean:\n\trm -f bin/* obj/*\n")?;
+    write(format!("{}/Makefile", dir), b"CC=gcc\nCFLAGS=-Iinclude\nLDFLAGS=-Llib\n\nall: main\n\nmain: obj/main.o\n\t$(CC) -o bin/main obj/main.o $(LDFLAGS)\n\nobj/main.o: src/main.c\n\t$(CC) -c -o obj/main.o src/main.c $(CFLAGS)\n\nclean:\n\trm -f bin/* obj/*\n")?;
 
     Ok(())
 }

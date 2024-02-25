@@ -1,5 +1,5 @@
 use std::process::Command;
-use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType };
+use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType, string_set };
 use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
@@ -9,7 +9,7 @@ pub fn init(config: &CommandConfig) -> Res {
     }
 
     let app_type = match config.vars.get("type") {
-        Some(app_type) => match app_type {
+        Some(app_type) => match app_type.as_str() {
             "exe" => "exe",
             "lib" => "lib",
             _ => "exe"
@@ -29,7 +29,9 @@ pub fn valid_args() -> ArgMap {
             name: "type".to_string(),
             description: "The type of application to create (exe or lib)".to_string(),
             aliases: string_set!["-t", "--type"],
-            arg_type: ArgType::Var,
+            arg_type: ArgType::Var{
+                parse: Box::new(|s| { Ok(s.to_string()) }),
+            },
             mutually_exclusive: std::collections::HashSet::new(),
         }),
     ];

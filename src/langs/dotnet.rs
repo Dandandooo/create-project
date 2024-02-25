@@ -1,5 +1,5 @@
 use std::process::Command;
-use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType };
+use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType, string_set };
 use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
@@ -11,17 +11,17 @@ pub fn init(config: &CommandConfig) -> Res {
     }
 
     match config.vars.get("name") {
-        Some(name) => args.push("-n").push(name),
+        Some(name) => {args.push("-n");args.push(name)},
         None => {} 
     }
 
     match config.vars.get("language") {
-        Some(lang) => args.push("--lang").push(lang),
+        Some(lang) => { args.push("--lang");args.push(lang)},
         None => {}
     }
 
     match config.vars.get("framework") {
-        Some(framework) => args.push("--framework").push(framework),
+        Some(framework) => {args.push("--framework");args.push(framework)},
         None => {}
     }
 
@@ -37,21 +37,27 @@ pub fn valid_args() -> ArgMap {
             name: "language".to_string(),
             description: "The language for .NET to use: C# (default), F#, VB".to_string(),
             aliases: string_set!["--lang"],
-            arg_type: ArgType::Var,
+            arg_type: ArgType::Var{
+                parse: Box::new(|s| { Ok(s.to_string()) }),
+            },
             mutually_exclusive: std::collections::HashSet::new(),
         }),
         Rc::new(Arg {
             name: "template".to_string(),
             description: "The template to use for the project. Default is Console Application. More info at https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new.".to_string(),
             aliases: string_set!["--template"],
-            arg_type: ArgType::Var,
+            arg_type: ArgType::Var{
+                parse: Box::new(|s| { Ok(s.to_string()) }),
+            },
             mutually_exclusive: std::collections::HashSet::new(),
         }),
         Rc::new(Arg {
             name: "framework".to_string(),
             description: "The target framework for the project. Optional. More info at https://docs.microsoft.com/en-us/dotnet/standard/frameworks.".to_string(),
             aliases: string_set!["--framework"],
-            arg_type: ArgType::Var,
+            arg_type: ArgType::Var{
+                parse: Box::new(|s| { Ok(s.to_string()) }),
+            },
             mutually_exclusive: std::collections::HashSet::new(),
         }),
     ];

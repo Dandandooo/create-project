@@ -1,11 +1,11 @@
 use std::process::Command;
-use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType };
+use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType, string_set };
 use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
     let mut args = vec!["package", "init", "--type"];
-    match config.args.get("app_type") {
-        Some(app_type) => match app_type {
+    match config.vars.get("app_type") {
+        Some(app_type) => match app_type.as_str() {
             "library" => args.push("library"),
             "executable" => args.push("executable"),
             "tool" => args.push("tool"),
@@ -38,7 +38,9 @@ pub fn valid_args() -> ArgMap {
             name: "app_type".to_string(),
             description: "Do you want to create a(n): library(default), executable, tool, build-tool-plugin, command-plugin, macro, empty".to_string(),
             aliases: string_set!["--type"],
-            arg_type: ArgType::Var,
+            arg_type: ArgType::Var{
+                parse: Box::new(|s| { Ok(s.to_string()) }),
+            },
             mutually_exclusive: std::collections::HashSet::new(),
         }),
     ];

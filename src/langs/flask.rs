@@ -1,5 +1,5 @@
 use std::process::Command;
-use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType };
+use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType, string_set };
 use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
@@ -20,7 +20,7 @@ pub fn init(config: &CommandConfig) -> Res {
     Command::new(format!("{venv_prefix}pip")).args(["install", "flask"]).spawn()?;
 
     // Create Hello World
-    let sample_code = b"from flask import Flask\napp = Flask(__name__)\napp = Flask(__name__)\n\n@app.route('/')\ndef index():\n    return 'Hello, World!'".to_string();
+    let sample_code = b"from flask import Flask\napp = Flask(__name__)\napp = Flask(__name__)\n\n@app.route('/')\ndef index():\n    return 'Hello, World!'";
     
     std::fs::write("app.py", sample_code)?;
 

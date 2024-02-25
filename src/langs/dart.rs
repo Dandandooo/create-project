@@ -14,5 +14,5 @@ pub fn init(config: &CommandConfig) -> Res {
 }
 
 pub fn valid_args() -> ArgMap {
-    Argmap::new()
+    ArgMap::new()
 }

@@ -1,9 +1,9 @@
 use std::process::Command;
-use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType };
+use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType, string_set };
 use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
-    let app_type = match config.args.get("library") {
+    let app_type = match config.vars.get("library") {
         Some(_) => "scala-library",
         None => "scala-application"
     };

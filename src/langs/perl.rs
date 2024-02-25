@@ -13,7 +13,7 @@ pub fn init(config: &CommandConfig) -> Res {
     };
     let sample_code = b"#!/usr/bin/perl\nuse warnings;\nprint(\"Hello, World!\\n\");";
 
-    write(format!("{}/main.pl", name), sample_code)?;
+    write(format!("{}/main.pl", dir), sample_code)?;
 
     Ok(())
 }

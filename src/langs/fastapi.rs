@@ -1,11 +1,11 @@
 use std::process::Command;
-use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType };
+use crate::{ CommandConfig, ArgMap, Res, Arg, ArgType, string_set };
 use std::rc::Rc;
 
 pub fn init(config: &CommandConfig) -> Res {
     match config.vars.get("name") {
         Some(name) => eprintln!("FastAPI does not support project names"),
-        None => {};
+        None => {}
     }
 
     let venv_prefix = match config.vars.get("virtual-environment") {

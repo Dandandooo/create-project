@@ -6,7 +6,6 @@ pub fn init(config: &CommandConfig) -> Res {
         Some(name) => name,
         None => "."
     };
-    }
 
     // Initialize default react project
     Command::new("npx").arg("create-react-app").arg(name).spawn()?;

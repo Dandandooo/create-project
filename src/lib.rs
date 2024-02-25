@@ -20,7 +20,7 @@ use crate::dependencies::ensure_installed;
 macro_rules! set {
     ( $( $x:expr ),* ) => {
         {
-            let mut temp_set = HashSet::new();
+            let mut temp_set = std::collections::HashSet::new();
             $(
                 temp_set.insert($x);
             )*
@@ -33,7 +33,7 @@ macro_rules! set {
 macro_rules! string_set {
     ( $( $x:expr ),* ) => {
         {
-            let mut temp_set = HashSet::new();
+            let mut temp_set = std::collections::HashSet::new();
             $(
                 temp_set.insert($x.to_string());
             )*
