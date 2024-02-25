@@ -5,15 +5,18 @@ mod rust;
 
 mod python;   
 
+use crate::Res;
 use super::args::{CommandConfig, ArgMap};
 use std::collections::{HashSet, HashMap};
+use std::env;
 use super::string_set;
 
 pub struct Language {
     pub name: String,
-    pub exec: Box<dyn Fn(&CommandConfig) -> Result<(), String>>,
+    pub exec: Box<dyn Fn(&CommandConfig) -> Res>,
     pub valid_args: Box<dyn Fn() -> ArgMap>,
     pub uses: HashSet<String>, // dependencies
+    pub ignores: HashSet<String>, // git ignores
 }
 
 pub fn supported_languages() -> HashMap<String, Language> {
@@ -23,6 +26,7 @@ pub fn supported_languages() -> HashMap<String, Language> {
             exec: Box::new(rust::init),
             valid_args: Box::new(rust::valid_args),
             uses: string_set!["cargo"],
+            ignores: string_set![env::consts::OS, "rust"],
         },
     ];
 
