@@ -13,7 +13,6 @@ pub fn init(config: &CommandConfig) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
-fn valid_args() -> ArgMap {
-    Argmap::new()
+pub fn valid_args() -> ArgMap {
+    ArgMap::new()
 }
-
