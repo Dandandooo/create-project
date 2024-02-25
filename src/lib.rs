@@ -3,6 +3,8 @@ const NAME: &str = "create";
 pub mod args;
 pub mod langs;
 
+pub type Res<T=()> = Result<T, Box<dyn Error>>;
+
 use std::env::args;
 use std::collections::{HashMap, HashSet};
 use std::error::Error;
