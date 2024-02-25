@@ -3,8 +3,11 @@ const NAME: &str = "create";
 pub mod args;
 pub mod langs;
 
+pub type Res<T=()> = Result<T, Box<dyn Error>>;
+
 use std::env::args;
 use std::collections::{HashMap, HashSet};
+use std::error::Error;
 use args::{ArgMap, Arg, CommandConfig};
 use langs::Language;
 
@@ -42,7 +45,7 @@ pub struct Command {
 }
 
 impl Command {
-    pub fn parse(args: std::env::Args) -> Result<Self, String> {
+    pub fn parse(args: std::env::Args) -> Result<Self, Box<dyn Error>> {
         let mut args = args.into_iter().skip(1).peekable();
 
 
@@ -51,24 +54,35 @@ impl Command {
             flags: HashSet::new(),
         };
 
+        let mut language: Option<String> = None;
+
         while let Some(arg) = args.next() {
             let next_arg = args.peek();
 
             if arg.starts_with("--") {
 
-            } else if arg.starts_with("-") {
-                let chars = arg.chars().into_iter().skip(1).collect();
+                continue;
+            } 
+            if arg.starts_with("-") {
+                let chars: Vec<char> = arg.chars().into_iter().skip(1).collect();
                 let has_value = next_arg.map_or(false, |a| { a.starts_with("-") });
-                if has_value && chars.size() > 1 { // this is invalid syntax
-                    return Err(format!("flags {} are not settable arguments\n
-                                       run {} --help for a list of commands", &arg, NAME));
-                } 
-                while let Some(c) = chars_iter.next(){
 
+                if has_value {
+                    if chars.len() > 1 {// this is invalid syntax
+                        return Err(Box::from(format!(
+                                "flags {} are not settable arguments\n
+                                 run {} --help for a list of commands", 
+                           &arg, NAME)));
+                    }
+                    global_config.vars.insert(chars[0].to_string(), args.next().unwrap());
+                    continue;
                 }
-            } else {
-                break; // reached lang
+
+                continue;
             }
+
+            language = Some(arg);
+            break; // reached language
         }
 
         // process lang
@@ -77,11 +91,11 @@ impl Command {
 
         }
 
-        Self {
+        Ok(Self {
             global_config,
             language,
             lang_config,
-        }
+        })
     }
 
     fn validate(&self, valid_global_args: &ArgMap, valid_lang_args: &Option<ArgMap>) -> Result<(), String> {
