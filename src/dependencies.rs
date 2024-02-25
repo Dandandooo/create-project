@@ -8,7 +8,7 @@ pub struct Dependency {
     pub install: Box<dyn Fn() -> Res>
 }
 
-fn dependencies() -> Res<HashMap<String, Dependency>> {
+pub fn dependencies() -> Res<HashMap<String, Dependency>> {
     let deps = [
         Dependency {
             name: "cargo".to_string(),

@@ -75,7 +75,7 @@ impl Command {
                         None => return Err(Box::from(format!("{} not a valid global option", arg)))
                     };
 
-                    if let ArgType::Var { parse } = arg.arg_type {
+                    if let ArgType::Var { parse } = &arg.arg_type {
                         var = parse(&var)?;
                     }
 
@@ -107,7 +107,7 @@ impl Command {
                         None => return Err(Box::from(format!("{} not a valid global option", arg)))
                     };
 
-                    if let ArgType::Var { parse } = arg.arg_type {
+                    if let ArgType::Var { parse } = &arg.arg_type {
                         var = parse(&var)?;
                     }
                     global_config.vars.insert(var, args.next().unwrap());
@@ -151,68 +151,69 @@ impl Command {
 
         // process lang
 
-        while let Some(arg) = args.next() { // TODO change from global to lang
-            let mut lang_config = &lang_config.unwrap();
+        if let Some(lcfg) = &mut lang_config {
+            while let Some(arg) = args.next() { // TODO change from global to lang
 
-            let next_arg = args.peek();
-            let has_value = next_arg.map_or(false, |a| { a.starts_with("-") });
+                let next_arg = args.peek();
+                let has_value = next_arg.map_or(false, |a| { a.starts_with("-") });
 
-            if arg.starts_with("--") {
-                let mut var = arg.chars().skip(2).collect::<String>();
-                if has_value {
-                    let arg = match globs.valid_global_args.get(&arg) {
-                        Some(a) => a,
-                        None => return Err(Box::from(format!("{} not a valid global option", arg)))
-                    };
+                if arg.starts_with("--") {
+                    let mut var = arg.chars().skip(2).collect::<String>();
+                    if has_value {
+                        let arg = match lcfg.1.get(&arg) {
+                            Some(a) => a,
+                            None => return Err(Box::from(format!("{} not a valid lang option", arg)))
+                        };
 
-                    if let ArgType::Var { parse } = arg.arg_type {
-                        var = parse(&var)?;
+                        if let ArgType::Var { parse } = &arg.arg_type {
+                            var = parse(&var)?;
+                        }
+
+                        lcfg.2.vars.insert(var, args.next().unwrap());
+                        continue;
                     }
 
-                    global_config.vars.insert(var, args.next().unwrap());
+                    if let None = lcfg.1.get(&var) {
+                        return Err(Box::from(format!("{} not a valid lang flag", var)));
+                    }
+
+                    lcfg.2.flags.insert(var);
                     continue;
-                }
+                } 
 
-                if let None = globs.valid_global_args.get(&var) {
-                    return Err(Box::from(format!("{} not a valid global flag", var)));
-                }
+                if arg.starts_with("-") {
+                    let chars: Vec<char> = arg.chars().into_iter().skip(1).collect();
 
-                global_config.flags.insert(var);
-                continue;
-            } 
-
-            if arg.starts_with("-") {
-                let chars: Vec<char> = arg.chars().into_iter().skip(1).collect();
-
-                if has_value {
-                    if chars.len() > 1 {// this is invalid syntax
-                        return Err(Box::from(format!(
-                                "flags {} are not settable arguments\n
+                    if has_value {
+                        if chars.len() > 1 {// this is invalid syntax
+                            return Err(Box::from(format!(
+                                        "flags {} are not settable arguments\n
                                  run {} --help for a list of commands", 
-                           &arg, NAME)));
-                    }
-                    let mut var = chars[0].to_string();
-                    let arg = match globs.valid_global_args.get(&arg) {
-                        Some(a) => a,
-                        None => return Err(Box::from(format!("{} not a valid global option", arg)))
-                    };
+                                 &arg, NAME)));
+                        }
+                        let mut var = chars[0].to_string();
+                        let arg = match lcfg.1.get(&arg) {
+                            Some(a) => a,
+                            None => return Err(Box::from(format!("{} not a valid lang option", arg)))
+                        };
 
-                    if let ArgType::Var { parse } = arg.arg_type {
-                        var = parse(&var)?;
+                        if let ArgType::Var { parse } = &arg.arg_type {
+                            var = parse(&var)?;
+                        }
+                        lcfg.2.vars.insert(var, args.next().unwrap());
+                        lcfg.2.vars.insert(chars[0].to_string(), args.next().unwrap());
+                        continue;
                     }
-                    global_config.vars.insert(var, args.next().unwrap());
-                    global_config.vars.insert(chars[0].to_string(), args.next().unwrap());
+
+                    for c in chars {
+                        if let None = lcfg.1.get(&c.to_string()) {
+                            return Err(Box::from(format!("{} not a valid lang flag", c)));
+                        }
+                        lcfg.2.flags.insert(c.to_string());
+                    }
+
                     continue;
                 }
-
-                for c in chars {
-                    if let None = globs.valid_global_args.get(&c.to_string()) {
-                        return Err(Box::from(format!("{} not a valid global flag", c)));
-                    }
-                    global_config.flags.insert(c.to_string());
-                }
-
-                continue;
             }
         }
 
@@ -222,15 +223,21 @@ impl Command {
         })
     }
 
-    pub fn exec(&self, globs: &Globals) -> Res {
-        todo!()
+    pub fn exec(self, globs: &Globals) -> Res {
+        if let Some(lcfg) = &self.lang_config {
+            self.global_command(globs)?;
+            self.lang_command(globs)
+        } else {
+            self.global_command(globs)
+        }
     }
 
     fn global_command(&self, globs: &Globals) -> Res {
-        todo!()
+        // TODO
+        Ok(())
     }
 
-    fn lang_command(&self, globs: &Globals) -> Res {
+    fn lang_command(self, globs: &Globals) -> Res {
         println!("here i would resolve dependencies"); // TODO
         let lcfg = self.lang_config.unwrap();
         (lcfg.0.exec)(&lcfg.2);
