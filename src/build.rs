@@ -30,7 +30,8 @@ fn main() {
         "perl".to_string(),
         "php,laravel".to_string(),
         "python".to_string(),
-        "react,javascript,typescript".to_string(),
+        "react,javascript".to_string(),
+        "react,typescript".to_string(),
         "ruby,rails".to_string(),
         "rust".to_string(),
         "scala".to_string(),
@@ -59,10 +60,7 @@ fn main() {
 fn install_gitignore(gitignore: String) {
     let filenames = gitignore.replace(",", "_");
     let file_path = format!("src/langs/gitignores/{filenames}.txt");
-    let cur_dir = String::from_utf8(Command::new("pwd").output().unwrap().stdout).unwrap();
-    println!("cur_dir: {cur_dir}");
-    let touch = Command::new("touch").arg(file_path.clone()).output().expect("Failed to create gitignore file");
-    let curl = Command::new("curl").args([format!("https://www.toptal.com/developers/gitignore/api/{gitignore}")]).output();
+    let curl = Command::new("curl").arg(format!("https://www.toptal.com/developers/gitignore/api/{gitignore}")).output();
     let curl_text = String::from_utf8(curl.unwrap().stdout).unwrap();
     write(file_path, curl_text).expect("Failed to write to gitignore file");
 }

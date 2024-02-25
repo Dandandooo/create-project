@@ -1,1 +1,208 @@
-<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131}button,html{font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}@media (prefers-color-scheme:dark){body{background-color:#222;color:#d9d9d9}body a{color:#fff}body a:hover{color:#ee730a;text-decoration:underline}body .lds-ring div{border-color:#999 transparent transparent}body .font-red{color:#b20f03}body .big-button,body .pow-button{background-color:#4693ff;color:#1d1d1d}body #challenge-success-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDI2IDI2Ij48cGF0aCBmaWxsPSIjZDlkOWQ5IiBkPSJNMTMgMGExMyAxMyAwIDEgMCAwIDI2IDEzIDEzIDAgMCAwIDAtMjZtMCAyNGExMSAxMSAwIDEgMSAwLTIyIDExIDExIDAgMCAxIDAgMjIiLz48cGF0aCBmaWxsPSIjZDlkOWQ5IiBkPSJtMTAuOTU1IDE2LjA1NS0zLjk1LTQuMTI1LTEuNDQ1IDEuMzg1IDUuMzcgNS42MSA5LjQ5NS05LjYtMS40Mi0xLjQwNXoiLz48L3N2Zz4=)}body #challenge-error-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+)}}body{display:flex;flex-direction:column;min-height:100vh}body.no-js .loading-spinner{visibility:hidden}body.no-js .challenge-running{display:none}body.dark{background-color:#222;color:#d9d9d9}body.dark a{color:#fff}body.dark a:hover{color:#ee730a;text-decoration:underline}body.dark .lds-ring div{border-color:#999 transparent transparent}body.dark .font-red{color:#b20f03}body.dark .big-button,body.dark .pow-button{background-color:#4693ff;color:#1d1d1d}body.dark #challenge-success-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDI2IDI2Ij48cGF0aCBmaWxsPSIjZDlkOWQ5IiBkPSJNMTMgMGExMyAxMyAwIDEgMCAwIDI2IDEzIDEzIDAgMCAwIDAtMjZtMCAyNGExMSAxMSAwIDEgMSAwLTIyIDExIDExIDAgMCAxIDAgMjIiLz48cGF0aCBmaWxsPSIjZDlkOWQ5IiBkPSJtMTAuOTU1IDE2LjA1NS0zLjk1LTQuMTI1LTEuNDQ1IDEuMzg1IDUuMzcgNS42MSA5LjQ5NS05LjYtMS40Mi0xLjQwNXoiLz48L3N2Zz4=)}body.dark #challenge-error-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+)}body.light{background-color:transparent;color:#313131}body.light a{color:#0051c3}body.light a:hover{color:#ee730a;text-decoration:underline}body.light .lds-ring div{border-color:#595959 transparent transparent}body.light .font-red{color:#fc574a}body.light .big-button,body.light .pow-button{background-color:#003681;border-color:#003681;color:#fff}body.light #challenge-success-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDI2IDI2Ij48cGF0aCBmaWxsPSIjMzEzMTMxIiBkPSJNMTMgMGExMyAxMyAwIDEgMCAwIDI2IDEzIDEzIDAgMCAwIDAtMjZtMCAyNGExMSAxMSAwIDEgMSAwLTIyIDExIDExIDAgMCAxIDAgMjIiLz48cGF0aCBmaWxsPSIjMzEzMTMxIiBkPSJtMTAuOTU1IDE2LjA1NS0zLjk1LTQuMTI1LTEuNDQ1IDEuMzg1IDUuMzcgNS42MSA5LjQ5NS05LjYtMS40Mi0xLjQwNXoiLz48L3N2Zz4=)}body.light #challenge-error-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI2ZjNTc0YSIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjZmM1NzRhIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+)}a{background-color:transparent;color:#0051c3;text-decoration:none;transition:color .15s ease}a:hover{color:#ee730a;text-decoration:underline}.main-content{margin:8rem auto;max-width:60rem;width:100%}.heading-favicon{height:2rem;margin-right:.5rem;width:2rem}@media (width <= 720px){.main-content{margin-top:4rem}.heading-favicon{height:1.5rem;width:1.5rem}}.footer,.main-content{padding-left:1.5rem;padding-right:1.5rem}.main-wrapper{align-items:center;display:flex;flex:1;flex-direction:column}.font-red{color:#b20f03}.spacer{margin:2rem 0}.h1{font-size:2.5rem;font-weight:500;line-height:3.75rem}.h2{font-weight:500}.core-msg,.h2{font-size:1.5rem;line-height:2.25rem}.body-text,.core-msg{font-weight:400}.body-text{font-size:1rem;line-height:1.25rem}@media (width <= 720px){.h1{font-size:1.5rem;line-height:1.75rem}.h2{font-size:1.25rem}.core-msg,.h2{line-height:1.5rem}.core-msg{font-size:1rem}}#challenge-error-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI2ZjNTc0YSIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjZmM1NzRhIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+);padding-left:34px}#challenge-error-text,#challenge-success-text{background-repeat:no-repeat;background-size:contain}#challenge-success-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDI2IDI2Ij48cGF0aCBmaWxsPSIjMzEzMTMxIiBkPSJNMTMgMGExMyAxMyAwIDEgMCAwIDI2IDEzIDEzIDAgMCAwIDAtMjZtMCAyNGExMSAxMSAwIDEgMSAwLTIyIDExIDExIDAgMCAxIDAgMjIiLz48cGF0aCBmaWxsPSIjMzEzMTMxIiBkPSJtMTAuOTU1IDE2LjA1NS0zLjk1LTQuMTI1LTEuNDQ1IDEuMzg1IDUuMzcgNS42MSA5LjQ5NS05LjYtMS40Mi0xLjQwNXoiLz48L3N2Zz4=);padding-left:42px}.text-center{text-align:center}.big-button{border:.063rem solid #0051c3;border-radius:.313rem;font-size:.875rem;line-height:1.313rem;padding:.375rem 1rem;transition-duration:.2s;transition-property:background-color,border-color,color;transition-timing-function:ease}.big-button:hover{cursor:pointer}.captcha-prompt:not(.hidden){display:flex}@media (width <= 720px){.captcha-prompt:not(.hidden){flex-wrap:wrap;justify-content:center}}.pow-button{background-color:#0051c3;color:#fff;margin:2rem 0}.pow-button:hover{background-color:#003681;border-color:#003681;color:#fff}.footer{font-size:.75rem;line-height:1.125rem;margin:0 auto;max-width:60rem;width:100%}.footer-inner{border-top:1px solid #d9d9d9;padding-bottom:1rem;padding-top:1rem}.clearfix:after{clear:both;content:"";display:table}.clearfix .column{float:left;padding-right:1.5rem;width:50%}.diagnostic-wrapper{margin-bottom:.5rem}.footer .ray-id{text-align:center}.footer .ray-id code{font-family:monaco,courier,monospace}.core-msg,.zone-name-title{overflow-wrap:break-word}@media (width <= 720px){.diagnostic-wrapper{display:flex;flex-wrap:wrap;justify-content:center}.clearfix:after{clear:none;content:none;display:initial;text-align:center}.column{padding-bottom:2rem}.clearfix .column{float:none;padding:0;width:auto;word-break:keep-all}.zone-name-title{margin-bottom:1rem}}.loading-spinner{height:76.391px}.lds-ring{display:inline-block;position:relative}.lds-ring,.lds-ring div{height:1.875rem;width:1.875rem}.lds-ring div{animation:lds-ring 1.2s cubic-bezier(.5,0,.5,1) infinite;border:.3rem solid transparent;border-radius:50%;border-top-color:#313131;box-sizing:border-box;display:block;position:absolute}.lds-ring div:first-child{animation-delay:-.45s}.lds-ring div:nth-child(2){animation-delay:-.3s}.lds-ring div:nth-child(3){animation-delay:-.15s}@keyframes lds-ring{0%{transform:rotate(0)}to{transform:rotate(1turn)}}@media screen and (-ms-high-contrast:active),screen and (-ms-high-contrast:none){.main-wrapper,body{display:block}}</style><meta http-equiv="refresh" content="375"></head><body class="no-js"><div class="main-wrapper" role="main"><div class="main-content"><noscript><div id="challenge-error-title"><div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId: '3',cZone: "www.toptal.com",cType: 'interactive',cNounce: '63458',cRay: '85af67e82ea12c90',cHash: 'c486cace973190d',cUPMDTk: "\/developers\/gitignore\/api\/macos,python?__cf_chl_tk=Cs1mtCcsjjjVhN3_YYm29j1EgWdIFS9vPUvw7TET.4I-1708858420-0.0-3069",cFPWv: 'b',cTTimeMs: '1000',cMTimeMs: '375000',cTplV: 5,cTplB: 'cf',cK: "visitor-time",fa: "\/developers\/gitignore\/api\/macos,python?__cf_chl_f_tk=Cs1mtCcsjjjVhN3_YYm29j1EgWdIFS9vPUvw7TET.4I-1708858420-0.0-3069",md: "mrmTR5HLuL4vd7STXcqzsbZJUJ5TmHxAFoPZMoVeehs-1708858420-1.1-Af7Woz7B_Uwscg3K8WXZWok1jev5788R5h_JyT_tt8EsH4k2EB4HC9KUciOnkRYolanyIDe5FBE06RNUo5bQzTEbnmIVl1uIiqS1Z0dSdZrACRZfrPkuDVACDMDRJLZsv9mxrDBCpDd2sLkHBoR9LbJ66XOVHMe3UL0zEFB_hG0v40CeGUS9jowDWAAdyi7bGBLNn7dXru6lA86lmOFCDeUX3ewqxdLLYXEYpbKdVk7qwaUrWQ8hFuUaxyRxK87gyLYBfAyFnKxKmjbXHSiShVIY6u2T44KeAkJaIQJHaxsk2jwmJWDa_VVeEEDNEV06ztOOiV4g0mToPwMqmKHEzLkqOnj9MmNH5gZJGifh4OtKFhUtB3-B7JPVhYRI_h7XtTHSxftMtYAB7j-jmuX2ASrV2mLo84wmyomyU9EpwxN8NBjGydaGnCTmIu2cO_FMKUIJar-fc3blIJDlXALqI5fkAi9C7gCca-FFoNVR9yVbeUpMkqf-JbCUxsWEOEIs9furF16tq25el62G5rk9tRcUsf96vo3PVUjheu8dvN5IVwwraCvplbcKXSnc-KWTq2XqtwL27GehLWTabJc0WwDmDdnKzOtMcQEL4naX2KauW_liMTPs4JTngMkChARfFcciVG4QSKNmQOYOPHB71LThyf2qVTBggso_0dhFXanMX_ec3IEsP5fF8ZDxkW8SR3YBQ_d0nWWrm9l0sgbAe7bquG234A5xi3UNOYyggbw6r5ZkoaJdIgRmh8lz0_Zq4hWlMqenMbNbFQfH_qNduXZ075ycCvDRZHNfoGB6AWGIaAd-mrue2AQQosomIl5s0S8eT0YqgFeo2ESLWUbh7Wv_rRDWdvoanv-cs_sV3ndBht46Jn3zHj94W1DGM7ZEK_VkanOk55xIMmkyMXyhCcCP7e_Z_29Ptuqxl22rmz13WHuaGdWBPm8XYOwcC6y7_lA5oShSegxgc_Ryq7kpo2nOY22Ye8GDRShcgEIVBr0Z9_cziLkz9APmmoXmqUPazSS4ZFRH4qzgQ1p7IS6pt0lMVcaRDFcQNWchoGD2maADrhwsK-kzreMovIfLQBHd4StjMXoLgQ9A3DlxAG0Zyq9GAXGzQ0oNWxt_pC_of6dJfqL3TeW77lXvyDc6YeoXhS5v-3zFl0brNwSqCNfl4kuSKXQGj8zHHOjN29dC9FR1dBiZgNM_2rGHYaMLYjBw_MY7VTGqNaCT5Oh9MYg-__6p2ebR7XiNhcPIgC7jO_FonGY8f9MnQTZqEUCh0w4_7HTvdNsL_R7D0mfZNueEHsadwZ0dIGmLyVGiBr95X8DBLKelBrc2g7tlKDBTQ_7-lSW2bRRfUDE5V_BBBl0TgvW2YqsKeZ1CvrFPMjhaajlWdUqeb5zvAkXOHpxMoGbOexUJqyUnmrgauyT59_mTaWpnUAceVX1dCZOU0cUAW6UQeMIZTnAhwZeziRqWVW8ELr06TcKBO49ETJRpRelA5bjtdlrhAZBy0EQr651UYX0C1NaMVIqIKzaHMJO39l4eKagE3jIg5XfgDsVPdUB9Yu2Oq0evDcbicvLgPmrM3EHcx4gNBuTEggu0gRZSxbrmGKgpPWN-_HyqPtAYUnDcQ0D9pEVOh7su5wbZ2UKcxQYPmGKNYKZi0i5gPyYfO4Z1mpy4rF-6Ns4Qov9fkAmCr6DU6_1QSnTFasIf1FCeeGhnLeKqp14BLBjmpFmDPy7eigSKyG85PWN9HeYe6G6IXXiaJ1j2MEqdAwpGTaGVrXp5O97Xtq6nDxDaKF45N3WMH1BDuciIP03Be_gh0Wknk-CCuRkCMjbLaM84o9qhW8fV-7kbh-IYDyNtn7_zxlTIqdB57cuChfS83QH0SOsHjkK_69bW9aaUabzPqzMpnyxAASCXfgxvu87lvF-Ycy6-ZZalNUBm1acQjUjrKaMykq0puylZvkUSZOmTDe5BXrUZr7drTSzvVGl1jFg-OQrLS6P2RA4DXWuzXAV4FZf5Mg4IJ45Sg4gpfd5eIOObJjo1H7wWk9kCB-qw6LvTH17nJro5KiujPa4hXdQ8kQZcGrtqwoKrgxALbglIKWncE3_sp6bfP4PHXJ5L1JEFxNJDwKbmDePPovAkf0TgN8NhozoFBsG5AmPsIhDfMdtjT78siKXKzsbMpJQ9jKq6wQR1WrvsWBNuoUSBLAxNX2IDZc764n9bwMoy3xBj-kSjyR0eQcboK0CYFy6lk6zLdG0ZkDRaE__ETy_TW_wCWUh09a6ycZoHAVqpBYFcND7KoCjNPptihQLUS2u-7qyXohriRCB8xUUUoi7tx69Nv06rqgISKHmqiwZrfMgifPH6gnAOzpmBrcY1rDNHC1U_RYJzUBPm9aRUVa8hLhf93y1sVIXuBFkW34p-1Hm7ZeAwisbNa3pyK6jw325ElH2_0OMyEa65ymzgmb3gbT-Jkuqma5uh46mVxlx6J_aq3dmblkt_Q1kURzBYoKKcsdqll0mlTeYljPReZGeWFvscFCzbOt9Smvy6FfvVIrhymGMPF0s182SCE_tcmDB0dRW-Y_QdUl_kjPT_G40TuEesTPKkc9OZeleVf05Ycj0xI74qDM3BmyUv9aRrpgUkUNVBjVqSuXzF17ImmBZEMdluVKKFicSuAJx9TfdgWEKRpYSTV9HjOUPswO6AKf_9lsL2O-jXDZZfs8cRIon65uMkjUpojdyLUY_hfI91M_-bbO-si0DTtdxlR7hHBuAXlKNIKCYK65aNMrxwVi1UdkT_3zoLA-opfD5LVvueN5xKydJSU3IcVUHHuKNOU4bGkW-dgNnyyQCf_e9CpK3jaCgMs5UDPLUlkPNaV1mq3upzl8vp0GvUh78WRtkf_XbSPVOrc5wIEpf0LoZp1uTHBI-mhQ03DoXvXfFwTKFDzqWfVuSbMwLQxqjLnJtjCfh5Qioszv7ugtCMUaBsdTR-Alld2EOPb6m0Jhg87o1cx2K5cE7uFcKC0CCyjRZNRzUVEjsnm0dLRA",mdrd: "pPvIFhU6zoEzm1uJlH0G0ScAKFGX8EZwSU6CLsC6TmY-1708858420-1.1-AdFxe4CD1O2_TojeESEIMsYZV6L1G7HR4QiiOiC6x2E3gBlWMVQl_f0VdANYfdX24TFvVCPNJxGAtE_nRmicP3Ex6xQ60CnixAMC-H2qWAl9dn2bwvwMy9p5Zm4T_7QDM15gS01tDTClM-8EZ1TLdjHtJeGTDU5wllIDC5SbeFLgfH-GJ2RZZ1kcmFe8jJagEhaHHMH1Wypa9y4qF-PsE_Cf3pkgGhjqMZ2nFToB55dkVB_hN1IfWru2SyWH4zH11K4TaiZnwtQ3-KeM58UsU78AY7WTNxMQWMznnBh_NTQt1p1Dqlay3wgrndsyP6h7R03rwYb_1UW7KtY8rISRom_GBnIMUi1DUT1Hhey8mNUVY5UOkETdLVJQVSgJjojlLgxHwJGbb6xWiJ8COsIyo81GTN9MngQ4KQ1HW3EusvsmVk4YByh4CkDZv-cT57zI1YB1vXQP7J0ptfGNV_at_o5hZOTi0y9wBuICWH3kIWWmTWvED-Vc6cp-Dk76qU3bdMlbNTXyvapz64n8yicbYi6Pzr6d2MHb9lu8biGoa32FIu28ZUZODQJ_maGZIvJaI9-EdpPcIBgoWpEycsMQxjMgni6HvQJrJ9yDe4Hbf7PMNwrZsXsGYSCFEzH-r2oQSy9O4Pjl0010dGVdoz0UfsG3uqUQqZ9l_F7SPAlsX48XglKEfCbexw7nPWodrf6cmkCnm-RlfD-V7UksxQP-aF8m5fqtMNAOFuUKMu4lNxgcMaeCZhMOH3J1XWSCeqXIlwMizB2D6x6UG-2xBE8inJWu7IOZm8K8543r8d4TlSwR_juOE42gEhwUHxHKtwFJcqH9bIlQPdBeZJ-6DfCnJr3SdENvL1HZkQ4y2BJiX1Q2thVivhIVn_H6SPmrXPR7b_seKZTJ7my0Pizq4xbGeZjvBGdNS0TmaJYiYNyg_3QBs9_6IQcoqFIcDCgNap4y1kfw13XhnsE1IQMY32d-Rgapk5eOLx7Gm9f9ttk6SuS9Z2SOpyHM19uEA4klByFi4UhGXdyYrwU-AVuHC4KNcA8I5Y6nz5wOBKSPkEPrNja54YxeMjqB04W13XpbgF42AmnoJT27frkBfirPwu10bduZGZHHUQbp3EPAgb7DULAkncmoV_iNB4OBtwLkXsDhnbq7teunl0tz85-eeuXNeb2WE9Blrv7Sdn7AzOHbTcti3n3UJ--fXMePPfY0PYwCXA6HoYs6pCsdBvsxFDDL1PaV2LqFGLnHrXd-zS4yXNoVoDb40_cbIGV469C_JuZhIdCwhLH4agwfLzySgFRC4IbnodRZoR1x3dz7S-wP_FKtTdS-o1IPwxM7xv4a0TRP0XkMr-AzCA_hxY-kUx_GsLWvP3F8EBznpF882EHv6Y6-GIbJACVZlwFzZF0ehLogsiT9PKLxBuFiTuGtmnlGcyizej0rlylIj1eYRS4LyGixbT_t7lZjBbZTv02iAjYySiGb3Ypfu_UnI-pJrK6VxYiMDdZ-tlPf14LxA3GJdX-iupBR_U9rFAPmBmho9Ap_S8kQEGoSS-Lsaek1u7cmwcCkITgv6P-x0IkvpDIrY4c5LIou3_Ty2K1KK1Lzqv4C60I9yRIWduNdwtNA68UCmJ-sX4gmfwxzoNerKgdJZXBaDDbOlVV0hP--R6j6FRBPN2-_vOIpiWBIMVAZZBeK3LR_7wekEjOQ63KUfxiOHdvsN-oVx0pLV85PIXEOtFRZ-hSHb6tsaBlFpzncBq7W_BjX8ILqAUQLl7giaWhjb4xB",cRq: {ru: 'aHR0cHM6Ly93d3cudG9wdGFsLmNvbS9kZXZlbG9wZXJzL2dpdGlnbm9yZS9hcGkvbWFjb3MscHl0aG9u',ra: 'Y3VybC84LjQuMA==',rm: 'R0VU',d: 'si7/jLLWnD58wB/CoVRxPXZ1e1kW86lu8NuWKbRIr9Rd+dfYur2HBHMiARjF6HvHAgvYLY+tMS+GhwEEh2yvMN7aR/ioMBgWCgvz6GXJrk+yMPc8IYM+ToTpTWX2ZG4waanUfZYc9Ffg3Z5nWymfDLmSvDOc6gszqMi5UEg2wMOJ7oSt2WmdQq+slpALu4CgpZ7yd8yI8OWdetZWRCjASJIgISMVWkrU2Dg5Bs9soVZRxScTBQxz1ne6cNzcsmwIv2UQfWYju2gWeplxIXYxqGI4RO6VPjEoHA2fhbS0hQN6CJ+sFv0thfVdT8rgOljwf2/asOORAevimvhx+fjOMEtXheno+t4XdSUmjLeuTWLy3OhKG6DBmIaUcv1eJAhyIjCBrGyNXnFFFm7c8wyTHwLUotU2IijGJizJIw3XsuX5I9J+CtXagA8DOJOf3nBvG1eFHB0fXOrZJVXTHEGErXnyy2x7BlQZReoFvVQbVsPhbyJkAwllT6qI2I95FbPEN0taLipRS6ZikgsdOHeaTTbP2aD1DaWUa/ro6ae7OdYsuFgWGCKMB5Cw8xhQyEFj',t: 'MTcwODg1ODQyMC41MTMwMDA=',cT: Math.floor(Date.now() / 1000),m: '/Ai09/D7f9myUA9tCwyFF+Dg3V8wQc3ih16zicjRflE=',i1: 'hLGLhlZZzVn01/cYvP+Lyw==',i2: 'HkBDkfoy3tceZBVXBInxtw==',zh: 'l6xgY/qkdGyH9m+Kmk8am4Vv8zY/Muc99tKdCjEbL88=',uh: 'F20Tx4X4PHV+2Q7oGaTcNODjxGvofpZg/mO+RSS8M+E=',hh: '1ETFGcuFGWDs7M2uEgnizUUK9L3rNj4/LEGcJJKE1fg=',}};var cpo = document.createElement('script');cpo.src = '/cdn-cgi/challenge-platform/h/b/orchestrate/chl_page/v1?ray=85af67e82ea12c90';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null, "\/developers\/gitignore\/api\/macos,python?__cf_chl_rt_tk=Cs1mtCcsjjjVhN3_YYm29j1EgWdIFS9vPUvw7TET.4I-1708858420-0.0-3069" + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(cpo);}());</script></body></html>
+# Created by https://www.toptal.com/developers/gitignore/api/macos,python
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,python
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+#poetry.lock
+
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/#use-with-ide
+.pdm.toml
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
+#.idea/
+
+### Python Patch ###
+# Poetry local configuration file - https://python-poetry.org/docs/configuration/#local-configuration
+poetry.toml
+
+# ruff
+.ruff_cache/
+
+# LSP config files
+pyrightconfig.json
+
+# End of https://www.toptal.com/developers/gitignore/api/macos,python

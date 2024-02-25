@@ -3,4 +3,5 @@ Cargo.lock
 .DS_Store
 .idea/
 .vscode/
-
+src/langs/gitignores/
+src/langs/gitignores.bak/

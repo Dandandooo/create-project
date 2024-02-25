@@ -17,7 +17,7 @@ pub fn init(config: &CommandConfig) -> Res {
         None => "."
     };
 
-    Command::new(format!("{venv_prefix}django-admin").args(["startproject", "project", name]).spawn()?;
+    Command::new(format!("{venv_prefix}django-admin")).args(["startproject", "project", name]).spawn()?;
 
     Ok(())
 }

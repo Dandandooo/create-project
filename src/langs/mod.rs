@@ -4,7 +4,7 @@ mod clojure;
 mod cpp;
 mod dart;
 mod django;
-mod dotnetcore;
+mod dotnet;
 mod elixir;
 mod express;
 mod fastapi;
