@@ -1,15 +1,33 @@
 use std::process::Command;
-use std::io::{stdin, stdout, Write};
-use std::io::{Error, ErrorKind}
+use crate::{ CommandConfig, ArgMap, Res };
 
-fn init(directory: String, git: bool) {
-    let npm = Command::new("which").arg("npm").output();
-    
-    if npm.is_err() {
-        println!("npm is not installed");
-        return;
+use std::fs::{ create_dir, rename, remove_dir, File };
+
+pub fn init(config: &CommandConfig) -> Res {
+    match config.vars.get("name") {
+        Some(name) => {
+            Command::new("npm").args(["init", "-y", "-w", name]).spawn()?;
+            rename(format!("{name}/package.json"), "package.json")?;
+            remove_dir(name)?;
+        },
+        None => {
+            Command::new("npm").arg("init").arg("-y").spawn()?;
+        }
     }
-
-
+    // Install typescript
+    Command::new("npm").args(["install", "typescript", "--save-dev"]).spawn()?;
     
+    // Create src directory
+    create_dir("src")?;
+
+    // Create index.ts
+    let mut file = File::create("src/index.ts")?;
+
+    file.write_all(b"console.log('Hello, World!')")?;
+
+    Ok(())    
+}
+
+pub fn valid_args() -> ArgMap {
+    ArgMap::new()
 }
